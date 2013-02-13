@@ -61,15 +61,34 @@
     [_cartView reloadData];
 }
 
-//Should remove all of the fruit in the cart.
--(IBAction)removeAllFruitInCart:(id)sender
+//Should remove all of the fruit in the cart or fill the cart with fruit.
+-(IBAction)emptyOrFillCart:(id)sender
 {
-    
-}
-
-//should add 50 bananas to the cart and display them!
--(IBAction)fillCartWithBananas:(id)sender
-{
+    _emptyOrNot = !_emptyOrNot;
+    if(_emptyOrNot){
+        [_cart removeAllObjects];
+        _allSelected = NO;
+        [_selectAll setTitle:@"Select All" forState:UIControlStateNormal];
+        [_cartView reloadData];
+        [_emptyOrFill setTitle:@"Fill" forState:UIControlStateNormal];
+    } else {
+        
+        for(int i = 0; i < 50; i++){
+            NSString * fruitName = [NSString stringWithFormat:@"Banana %d", i];
+            
+            if((i % 10) == 0){
+                fruitName = [NSString stringWithFormat:@"Free Banana %d", i];
+            }
+            
+            Fruit * anonFruit = [[Fruit alloc] initWithWithName:fruitName andColor:@"Yellow" andShape:@"Curved"];
+            anonFruit.url = @"http://en.m.wikipedia.org/wiki/Banana";
+            [_cart addObject:anonFruit];
+        }
+        
+        [_emptyOrFill setTitle:@"Empty" forState:UIControlStateNormal];
+        [_cartView reloadData];
+        
+    }
     
 }
 
@@ -88,9 +107,6 @@
 
 -(int) tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    if([_cart count] == 0){
-        return 1;
-    }
     return [_cart count];
 }
 

@@ -12,16 +12,17 @@
 
 @property (nonatomic, assign) BOOL allSelected;
 
+@property (nonatomic, assign) BOOL emptyOrNot; 
+
 @property (nonatomic, strong) NSMutableArray * cart;
 
 @property (nonatomic, weak) IBOutlet UITableView *cartView;
 
 @property (nonatomic, weak) IBOutlet UIButton * selectAll;
 
+@property (nonatomic, weak) IBOutlet UIButton * emptyOrFill;
+
 -(IBAction)selectAllOrNone:(id)sender;
-
-
--(IBAction)removeAllFruitInCart:(id)sender;
--(IBAction)fillCartWithBananas:(id)sender;
+-(IBAction)emptyOrFillCart:(id)sender;
 
 @end
